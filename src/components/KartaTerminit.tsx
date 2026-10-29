@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 type Props = {
   emri: string;
@@ -8,14 +9,20 @@ type Props = {
 };
 
 export default function KartaTerminit({ emri, ora, sherbimi, statusi }: Props) {
+  const [statusiTani, setStatusiTani] = useState(statusi);
+
+  function ndrysho() {
+    setStatusiTani(statusiTani === "në pritje" ? "konfirmuar" : "në pritje");
+  }
+
   return (
-    <View style={styles.karta}>
+    <Pressable onPress={ndrysho} style={styles.karta}>
       <Text style={styles.emri}>{emri}</Text>
       <Text>
         {ora} · {sherbimi}
       </Text>
-      <Text>{statusi}</Text>
-    </View>
+      <Text>{statusiTani}</Text>
+    </Pressable>
   );
 }
 
